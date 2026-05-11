@@ -7,190 +7,93 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --gov-blue:#1351B4;
-  --gov-blue-dark:#071D41;
-  --gov-green:#168821;
-  --gov-yellow:#FFCD07;
-  --gray-100:#F8F8F8;
-  --gray-200:#EDEDED;
-  --gray-600:#555;
-  --white:#fff;
-  --radius:12px;
-}
+:root{--gov-blue:#1351B4;--gov-blue-dark:#071D41;--gov-green:#168821;--gov-yellow:#FFCD07;--gray-100:#F8F8F8;--gray-200:#EDEDED;--gray-600:#555;--white:#fff;--radius:12px}
 html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--gray-100);color:#333}
-
-/* HEADER */
 .header{background:var(--gov-blue-dark);padding:12px 24px;display:flex;align-items:center;gap:16px}
-.header img{height:36px}
 .header-text{color:var(--white);font-size:14px;line-height:1.3}
 .header-text strong{font-size:16px;display:block}
-
-/* MAIN */
 .main{max-width:800px;margin:0 auto;height:calc(100vh - 60px);display:flex;flex-direction:column;padding:0 16px}
-
-/* MESSAGES */
 .messages{flex:1;overflow-y:auto;padding:24px 0;display:flex;flex-direction:column;gap:16px}
 .msg{max-width:85%;padding:14px 18px;border-radius:var(--radius);font-size:15px;line-height:1.55;animation:fadeIn .3s ease}
 .msg-user{align-self:flex-end;background:var(--gov-blue);color:var(--white);border-bottom-right-radius:4px}
 .msg-bot{align-self:flex-start;background:var(--white);border:1px solid var(--gray-200);border-bottom-left-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.msg-bot pre{white-space:pre-wrap;font-family:inherit}
 .msg-bot table{border-collapse:collapse;margin:8px 0;font-size:13px;width:100%}
 .msg-bot th,.msg-bot td{border:1px solid var(--gray-200);padding:6px 10px;text-align:left}
 .msg-bot th{background:var(--gov-blue);color:var(--white);font-weight:600}
 .msg-bot strong{color:var(--gov-blue-dark)}
-
 .typing{align-self:flex-start;padding:14px 18px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);border-bottom-left-radius:4px}
 .typing span{display:inline-block;width:8px;height:8px;background:var(--gov-blue);border-radius:50%;margin:0 2px;animation:bounce .6s infinite}
 .typing span:nth-child(2){animation-delay:.15s}
 .typing span:nth-child(3){animation-delay:.3s}
-
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* WELCOME */
-.welcome{text-align:center;padding:40px 20px}
+.welcome{text-align:center;padding:32px 20px}
 .welcome h1{font-size:22px;color:var(--gov-blue-dark);margin-bottom:8px}
-.welcome p{color:var(--gray-600);font-size:15px;margin-bottom:24px}
-.suggestions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.welcome p{color:var(--gray-600);font-size:15px;margin-bottom:20px}
+.cat-label{font-size:12px;font-weight:700;color:var(--gov-blue);text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 6px;display:block}
+.suggestions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px}
 .suggestions button{background:var(--white);border:1px solid var(--gov-blue);color:var(--gov-blue);padding:8px 16px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit;transition:all .2s}
 .suggestions button:hover{background:var(--gov-blue);color:var(--white)}
-
-/* INPUT */
 .input-area{padding:16px 0;display:flex;gap:10px}
 .input-area input{flex:1;padding:14px 18px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
 .input-area input:focus{border-color:var(--gov-blue)}
 .input-area button{padding:14px 24px;background:var(--gov-blue);color:var(--white);border:none;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s}
 .input-area button:hover{background:var(--gov-blue-dark)}
 .input-area button:disabled{background:var(--gray-200);color:var(--gray-600);cursor:not-allowed}
-
-/* FOOTER */
 .footer{text-align:center;padding:8px;font-size:11px;color:#999}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-text">
     <strong>Novo PAC Saúde</strong>
     Combo de Equipamentos UBS — Assistente Virtual
   </div>
 </div>
-
 <div class="main">
   <div class="messages" id="messages">
     <div class="welcome" id="welcome">
       <h1>🏥 Assistente de Equipamentos UBS</h1>
-      <p>Consulte informações sobre a distribuição de combos de equipamentos para Unidades Básicas de Saúde em todo o Brasil, por município, estado ou nacional. Também respondo perguntas frequentes sobre o programa.</p>
+      <p>Consulte informações sobre combos de equipamentos, boas práticas de uso e dúvidas gerais sobre o programa.</p>
+      <span class="cat-label">📊 Consultas de dados</span>
       <div class="suggestions">
         <button onclick="askSuggestion(this)">Quantos combos Brasília recebeu?</button>
-        <button onclick="askSuggestion(this)">Total de equipamentos de Tocantins</button>
+        <button onclick="askSuggestion(this)">Total de combos de Tocantins</button>
         <button onclick="askSuggestion(this)">Total de combos no Brasil</button>
+      </div>
+      <span class="cat-label">❓ Perguntas frequentes</span>
+      <div class="suggestions">
         <button onclick="askSuggestion(this)">O que é o combo de equipamentos?</button>
+        <button onclick="askSuggestion(this)">Quais equipamentos estão no combo?</button>
+        <button onclick="askSuggestion(this)">E se o equipamento chegar com defeito?</button>
         <button onclick="askSuggestion(this)">Quem é responsável pela manutenção?</button>
+        <button onclick="askSuggestion(this)">Como saber se meu município foi contemplado?</button>
+      </div>
+      <span class="cat-label">🔧 Boas práticas de uso</span>
+      <div class="suggestions">
+        <button onclick="askSuggestion(this)">Como conservar o desfibrilador (DEA)?</button>
+        <button onclick="askSuggestion(this)">Cuidados com a câmara fria de vacinas</button>
+        <button onclick="askSuggestion(this)">Como limpar o eletrocardiógrafo?</button>
+        <button onclick="askSuggestion(this)">Boas práticas com o espirômetro</button>
       </div>
     </div>
   </div>
-
   <div class="input-area">
-    <input type="text" id="input" placeholder="Pergunte sobre equipamentos, municípios, entregas..." 
+    <input type="text" id="input" placeholder="Pergunte sobre combos, equipamentos, boas práticas..."
            onkeydown="if(event.key==='Enter')sendMessage()">
     <button id="sendBtn" onclick="sendMessage()">Enviar</button>
   </div>
   <div class="footer">Dados: Ministério da Saúde — Novo PAC Saúde. Respostas geradas por IA com base nos dados oficiais.</div>
 </div>
-
 <script>
-const messagesEl = document.getElementById('messages');
-const inputEl = document.getElementById('input');
-const sendBtn = document.getElementById('sendBtn');
-const welcomeEl = document.getElementById('welcome');
-let isLoading = false;
-let chatHistory = [];  // conversation history
-
-function askSuggestion(btn) {
-  inputEl.value = btn.textContent;
-  sendMessage();
-}
-
-function addMessage(text, isUser) {
-  if (welcomeEl) welcomeEl.style.display = 'none';
-  const div = document.createElement('div');
-  div.className = `msg ${isUser ? 'msg-user' : 'msg-bot'}`;
-  if (isUser) {
-    div.textContent = text;
-  } else {
-    div.innerHTML = formatMarkdown(text);
-  }
-  messagesEl.appendChild(div);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-function showTyping() {
-  const div = document.createElement('div');
-  div.className = 'typing';
-  div.id = 'typing';
-  div.innerHTML = '<span></span><span></span><span></span>';
-  messagesEl.appendChild(div);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-function hideTyping() {
-  const el = document.getElementById('typing');
-  if (el) el.remove();
-}
-
-function formatMarkdown(text) {
-  // Tables
-  text = text.replace(/\|(.+)\|\n\|[-|: ]+\|\n((?:\|.+\|\n?)*)/g, (match, header, rows) => {
-    const ths = header.split('|').filter(Boolean).map(h => `<th>${h.trim()}</th>`).join('');
-    const trs = rows.trim().split('\n').map(row => {
-      const tds = row.split('|').filter(Boolean).map(d => `<td>${d.trim()}</td>`).join('');
-      return `<tr>${tds}</tr>`;
-    }).join('');
-    return `<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
-  });
-  // Bold
-  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  // Line breaks
-  text = text.replace(/\n/g, '<br>');
-  return text;
-}
-
-async function sendMessage() {
-  const msg = inputEl.value.trim();
-  if (!msg || isLoading) return;
-
-  isLoading = true;
-  sendBtn.disabled = true;
-  inputEl.value = '';
-  addMessage(msg, true);
-  showTyping();
-
-  try {
-    const resp = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: msg, history: chatHistory })
-    });
-    const data = await resp.json();
-    hideTyping();
-    if (data.error) {
-      addMessage('❌ Erro: ' + data.error, false);
-    } else {
-      chatHistory.push({ role: 'user', content: msg });
-      chatHistory.push({ role: 'assistant', content: data.answer });
-      addMessage(data.answer, false);
-    }
-  } catch (e) {
-    hideTyping();
-    addMessage('❌ Erro de conexão com o servidor.', false);
-  }
-
-  isLoading = false;
-  sendBtn.disabled = false;
-  inputEl.focus();
-}
+const messagesEl=document.getElementById('messages'),inputEl=document.getElementById('input'),sendBtn=document.getElementById('sendBtn'),welcomeEl=document.getElementById('welcome');
+let isLoading=false, chatHistory=[];
+function askSuggestion(btn){inputEl.value=btn.textContent;sendMessage()}
+function addMessage(text,isUser){if(welcomeEl)welcomeEl.style.display='none';const div=document.createElement('div');div.className=`msg ${isUser?'msg-user':'msg-bot'}`;if(isUser){div.textContent=text}else{div.innerHTML=formatMarkdown(text)}messagesEl.appendChild(div);messagesEl.scrollTop=messagesEl.scrollHeight}
+function showTyping(){const div=document.createElement('div');div.className='typing';div.id='typing';div.innerHTML='<span></span><span></span><span></span>';messagesEl.appendChild(div);messagesEl.scrollTop=messagesEl.scrollHeight}
+function hideTyping(){const el=document.getElementById('typing');if(el)el.remove()}
+function formatMarkdown(text){text=text.replace(/\|(.+)\|\n\|[-|: ]+\|\n((?:\|.+\|\n?)*)/g,(m,header,rows)=>{const ths=header.split('|').filter(Boolean).map(h=>`<th>${h.trim()}</th>`).join('');const trs=rows.trim().split('\n').map(row=>{const tds=row.split('|').filter(Boolean).map(d=>`<td>${d.trim()}</td>`).join('');return`<tr>${tds}</tr>`}).join('');return`<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`});text=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');text=text.replace(/\n/g,'<br>');return text}
+async function sendMessage(){const msg=inputEl.value.trim();if(!msg||isLoading)return;isLoading=true;sendBtn.disabled=true;inputEl.value='';addMessage(msg,true);showTyping();try{const resp=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:chatHistory})});const data=await resp.json();hideTyping();if(data.error){addMessage('❌ Erro: '+data.error,false)}else{chatHistory.push({role:'user',content:msg});chatHistory.push({role:'assistant',content:data.answer});addMessage(data.answer,false)}}catch(e){hideTyping();addMessage('❌ Erro de conexão com o servidor.',false)}isLoading=false;sendBtn.disabled=false;inputEl.focus()}
 </script>
 </body>
 </html>
