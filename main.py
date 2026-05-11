@@ -2,11 +2,13 @@ import os, json, re, math, unicodedata
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import httpx
 
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 BASE_DIR = os.path.dirname(__file__)
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
 
 # ── Load data ──
 with open(os.path.join(BASE_DIR, "municipios_data.json"), "r", encoding="utf-8") as f:
@@ -62,12 +64,11 @@ def search_pdf_chunks(query, top_k=4):
     ranked = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
     return [PDF_CHUNKS[i] for i in ranked[:top_k] if scores[i] > 0]
 
-# ── Normalize ──
 def normalize(text):
     text = unicodedata.normalize("NFKD", text)
     return "".join(c for c in text if not unicodedata.category(c).startswith("M")).upper().strip()
 
-# ── Municipality search ──
+# ── Municipality search (stable version) ──
 def search_municipios(query):
     query_upper = query.upper()
     query_norm = normalize(query)
@@ -97,6 +98,19 @@ def search_municipios(query):
     is_brasil = any(w in query_upper for w in ["BRASIL","PAÍS","NACIONAL"])
     is_total = "TOTAL" in query_upper
 
+    # Brasil total - handle BEFORE municipality search
+    if is_brasil and "Total Brasil" in TOTAL_BY_UF:
+        t = TOTAL_BY_UF["Total Brasil"].copy(); t["_tipo"]="total_brasil"
+        results.append(t)
+        return results[:10], flags
+
+    # UF total - handle BEFORE municipality search
+    if found_uf and not results:
+        if found_uf in TOTAL_BY_UF:
+            t = TOTAL_BY_UF[found_uf].copy(); t["_tipo"]="total_uf"
+            results.append(t)
+            return results[:10], flags
+
     # Search by name
     if not results:
         scored = []
@@ -109,11 +123,10 @@ def search_municipios(query):
                 scored.append((90,nome,muns)); continue
             nome_words = [w for w in nome_norm.split() if len(w) > 3]
             if nome_words:
+                # Only match if ALL significant words match (whole-word)
                 matches = sum(1 for w in nome_words if w in query_words)
                 if matches == len(nome_words):
                     scored.append((80,nome,muns))
-                elif matches > 0 and matches >= len(nome_words)*0.5:
-                    scored.append((50+matches*10,nome,muns))
         scored.sort(key=lambda x:-x[0])
         for score, nome, muns in scored[:5]:
             nome_norm = normalize(nome)
@@ -132,19 +145,16 @@ def search_municipios(query):
                 else:
                     results.extend(muns[:1])
 
-    # UF totals
-    if found_uf and not results:
-        if found_uf in TOTAL_BY_UF:
-            t = TOTAL_BY_UF[found_uf].copy(); t["_tipo"]="total_uf"; results.append(t)
-
-    # Brasil total
-    if (is_brasil or (is_total and not found_uf and not results)) and "Total Brasil" in TOTAL_BY_UF:
-        t = TOTAL_BY_UF["Total Brasil"].copy(); t["_tipo"]="total_brasil"; results.append(t)
-
     if is_total and not is_brasil and not found_uf and not results:
         flags["total_ambiguo"] = True
 
-    if not results and not flags and not is_total and not is_brasil:
+    # Generic quantity question without context
+    qty_words = ["QUANTOS","QUANTAS","QUANTO","DISTRIBUIDO","DISTRIBUIDOS","RECEBER","RECEBEU","SERAO"]
+    is_qty = any(w in query_upper for w in qty_words)
+    if is_qty and not results and not found_uf and not is_brasil:
+        flags["pergunta_generica_sem_contexto"] = True
+
+    if not results and not flags and not is_total and not is_brasil and not is_qty:
         query_clean = re.sub(r"[^A-Z ]","",query_norm)
         words = [w for w in query_clean.split() if len(w) > 3]
         if words: flags["municipio_nao_encontrado"] = True
@@ -170,10 +180,14 @@ REGRAS OBRIGATÓRIAS:
 9. Se o usuário pedir planilha, arquivo ou download: diga que não é possível compartilhar arquivos, mas que pode ajudar via chat.
 10. Se "municipio_duplicado" nos flags: pergunte de qual estado (UF) antes de responder.
 11. Se "municipio_nao_encontrado" nos flags: diga que não encontrou pelo nome e pergunte se tem o código IBGE.
-12. Se o usuário perguntar sobre um equipamento que NÃO está na lista dos 17, informe que esse equipamento não faz parte do combo e liste os 17 para que ele identifique o correto.
-13. Se "total_ambiguo" nos flags: confirme se quer total do município, UF ou Brasil.
-14. Mantenha o contexto da conversa (se falou de Brasília e depois pergunta "e os equipamentos?", refere-se a Brasília).
-15. Os 17 equipamentos são: 1.Balança portátil digital, 2.Cadeira de rodas, 3.Câmara fria para vacinas, 4.Dermatoscópio digital, 5.Dinamômetro digital, 6.DEA, 7.Doppler vascular portátil, 8.Eletrocardiógrafo digital, 9.Eletrocautério (bisturi elétrico), 10.Espirômetro digital, 11.Fotóforo clínico, 12.Laser terapêutico de baixa potência, 13.Otoscópio, 14.Retinógrafo portátil, 15.TENS e FES, 16.Tábua de propriocepção, 17.Ultrassom para fisioterapia.
+12. Se "total_ambiguo" ou "pergunta_generica_sem_contexto" nos flags: pergunte ao usuário se deseja a informação do Brasil inteiro ou de algum município/estado específico. NÃO chute nenhum município.
+13. Mantenha o contexto da conversa (se falou de Brasília e depois pergunta "e os equipamentos?", refere-se a Brasília).
+14. Os 17 equipamentos DO COMBO são: 1.Balança portátil digital, 2.Cadeira de rodas, 3.Câmara fria para vacinas, 4.Dermatoscópio digital, 5.Dinamômetro digital, 6.DEA, 7.Doppler vascular portátil, 8.Eletrocardiógrafo digital, 9.Eletrocautério (bisturi elétrico), 10.Espirômetro digital, 11.Fotóforo clínico, 12.Laser terapêutico de baixa potência, 13.Otoscópio, 14.Retinógrafo portátil, 15.TENS e FES, 16.Tábua de propriocepção, 17.Ultrassom para fisioterapia.
+
+SOBRE BOAS PRÁTICAS:
+15. Você possui informações sobre boas práticas de uso, conservação, manutenção e indicações clínicas de TODOS os equipamentos mencionados nos guias, incluindo itens que NÃO fazem parte do combo. Pode e deve responder essas perguntas com toda informação disponível.
+16. A restrição de NÃO informar quantidades por tipo se aplica APENAS à distribuição de combos. Para perguntas sobre uso, conservação, indicações e boas práticas, responda normalmente.
+17. Se o usuário perguntar sobre a QUANTIDADE de um equipamento que não está nos 17 do combo, informe que não faz parte do combo e liste os 17. Mas se a pergunta for sobre USO ou CONSERVAÇÃO de qualquer equipamento, responda normalmente.
 """
 
 @app.post("/api/chat")
@@ -182,17 +196,18 @@ async def chat(request: Request):
     question = body.get("message","")
     history = body.get("history",[])
 
-    search_text = question
-    if history:
+    # Search question alone first
+    mun_results, flags = search_municipios(question)
+    pdf_results = search_pdf_chunks(question)
+
+    # If no municipality found and we have history, try with context
+    if not mun_results and not flags.get("pergunta_generica_sem_contexto") and history:
         recent = [h["content"] for h in history if h["role"]=="user"][-2:]
         search_text = " ".join(recent) + " " + question
-
-    mun_results, flags = search_municipios(search_text)
-    pdf_results = search_pdf_chunks(search_text)
-
-    if not mun_results and not flags:
-        mun_results2, flags2 = search_municipios(question)
-        if mun_results2 or flags2: mun_results, flags = mun_results2, flags2
+        mun_results2, flags2 = search_municipios(search_text)
+        if mun_results2: mun_results, flags = mun_results2, flags2
+        pdf_results2 = search_pdf_chunks(search_text)
+        if pdf_results2 and not pdf_results: pdf_results = pdf_results2
 
     parts = []
     if flags: parts.append(f"=== FLAGS ===\n{json.dumps(flags, ensure_ascii=False)}")
