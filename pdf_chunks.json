@@ -1,135 +1,147 @@
 [
   {
+    "id": "faq_intro",
+    "text": "Ficha Catalográfica Inserir créditos Apresentação Este documento reúne as principais perguntas e respostas sobre a implementação da entrega dos 180 mil equipamentos que vão modernizar as Unidades Básicas de Saúde (UBS) em todo o país. Os itens estão organizados em combos com 18 equipamentos para cada unidade, adquiridos no âmbito do PAC Saúde 2025, com investimentos de aproximadamente R$ 1,6 bilhão. Elaborado para apoiar gestores e equipes da Atenção Primária à Saúde, este guia tem como objetivo orientar sobre os critérios de participação, etapas de entrega, instalação, uso e gestão dos equipa"
+  },
+  {
     "id": "faq_1",
-    "text": "O que é o combo de equipamentos para as UBS do Novo PAC? É um conjunto padronizado de 17 equipamentos destinados às UBS com o objetivo de conectar, modernizar, ampliar a capacidade de atendimento e apoiar a organização das ações de cuidado e do processo de trabalho das equipes na Atenção Primária à Saúde (APS)."
+    "text": "1- O que é o combo de equipamentos para Unidades Básicas de Saúde (UBS) do Novo PAC Saúde 2025? Trata-se de um conjunto (combo) de tecnologias em saúde composto por 18 equipamentos destinados a qualificar o cuidado no território, apoiar a tomada de decisões clínicas, ampliar a resolutividade da Atenção Primária à Saúde (APS) frente às principais demandas de saúde — como diabetes mellitus, hipertensão arterial sistêmica, risco cardiovascular, doenças respiratórias crônicas, alterações oftalmológicas, lesões dermatológicas, dor crônica e condições musculoesqueléticas de baixa e média complexidade — além de fortalecer a capacidade de atendimento, promover a conectividade, modernizar os serviços e apoiar a organização das ações de cuidado e do processo de trabalho das equipes em todo o país. E"
   },
   {
     "id": "faq_2",
-    "text": "Quem pode receber os equipamentos? Municípios e o Distrito Federal que participaram do processo de seleção do Novo PAC Saúde, conforme Portaria GM/MS nº 6.640, de 20 de fevereiro de 2025, mediante envio de proposta (carta-consulta) nos sistemas oficiais do Ministério da Saúde."
+    "text": "1.1 Quais equipamentos compõem o Combo, qual sua utilidade na UBS e os impactos esperados para a Atenção Primaria à Saúde com essa iniciativa? Fonte: Autoria Própria."
   },
   {
     "id": "faq_3",
-    "text": "Uma UBS pode receber mais de um combo? Não. A solicitação é restrita a um único combo por Unidade Básica de Saúde."
+    "text": "1.2 O município pode definir quais equipamentos irão compor o conjunto destinado às UBS? Não. A definição dos equipamentos é de responsabilidade do Ministério da Saúde, fundamentada em evidências epidemiológicas, dados de fontes oficiais e análise das necessidades assistenciais da APS, considerando condições de alta prevalência e relevância sanitária, como diabetes mellitus, doenças cardiovasculares, doenças respiratórias crônicas, condições musculoesqueléticas, demandas de reabilitação, saúde ocular, saúde dermatológica, imunização e acessibilidade. A seleção dos equipamentos priorizou tecnologias com potencial de ampliar a avaliação clínica, o apoio diagnóstico, o acompanhamento longitudinal e o cuidado oportuno no território, contribuindo para reduzir deslocamentos evitáveis, qualificar"
   },
   {
     "id": "faq_4",
-    "text": "Como saber se meu município foi contemplado? Consulte o resultado do processo de seleção por meio da PORTARIA GM/MS Nº 7.613, DE 17 DE JULHO DE 2025."
+    "text": "1.3 Uma Unidade Básica de Saúde pode receber mais de um combo de equipamentos? Não. Cada UBS poderá receber apenas um combo de equipamentos. Os combos serão compostos por 17 ou 18 itens, sendo que a maior parte das unidades receberão 17 equipamentos. O ultrassom portátil de bolso será destinado exclusivamente às UBS que atuam como cenário de residência em Medicina de Família e Comunidade (MFC) e UBS fluviais, totalizando 18 equipamentos nesses casos."
   },
   {
     "id": "faq_5",
-    "text": "Foi necessário fazer adesão? Sim. Todos os municípios precisaram realizar a adesão por meio do InvestSUS dentro do prazo estabelecido. O que acontece se o município não aderiu no prazo? Pode perder o direito ao recebimento dos equipamentos."
+    "text": "1.4 - Qual valor   investido na aquisição dos combos de equipamentos destinados às UBS? O Programa de Aceleração do Crescimento (PAC) no eixo Saúde - edição 2025, destinou cerca de R$ 1,6 bilhão do orçamento do governo federal para a compra e distribuição de 180 mil equipamentos voltados à modernização da atenção primária em todo o país. São 5.093 municípios contemplados. Cada conjunto de equipamentos reúne 18 itens, com um investimento de aproximadamente R$ 158 mil por combo."
   },
   {
     "id": "faq_6",
-    "text": "Quais equipamentos estão incluídos no combo? 1. balança portátil digital (até 200kg), 2. cadeira de rodas (até 200kg), 3. câmara fria exclusiva para vacinas, 4. dermatoscópio digital, 5. dinamômetro digital, 6. desfibrilador externo automático (DEA), 7. doppler vascular portátil, 8. eletrocardiógrafo digital, 9. eletrocautério (bisturi elétrico), 10. espirômetro digital, 11. fotóforo clínico, 12. laser terapêutico de baixa potência, 13. otoscópio, 14. retinógrafo portátil, 15. TENS e FES, 16. tábua de propriocepção, 17. ultrassom para fisioterapia."
+    "text": "1.5 - O município precisa licitar os equipamentos? Não. O processo de aquisição dos equipamentos é centralizado pela Agência Brasileira de Apoio à Gestão do Sistema Único de Saúde (AgSUS), responsável pelo processo licitatório de compra e distribuição dos equipamentos para os 5.093 municípios contemplados."
   },
   {
     "id": "faq_7",
-    "text": "O município pode escolher quais equipamentos irão compor o combo? Não. Os combos são padronizados pelo Ministério da Saúde."
+    "text": "1.6 - Quantos combos meu município vai ganhar? A quantidade de combos destinados a cada município pode ser consultada no Sistema de Logística da AgSUS (Sisloga) e no site do Ministério da Saúde."
   },
   {
     "id": "faq_8",
-    "text": "Como será feita a entrega dos equipamentos? A entrega acontece em etapas, por meio dos fornecedores de cada equipamento, com suporte logístico da AgSUS."
+    "text": "1.7 - Quais UBS do meu município foram indicadas para receber os equipamentos do combo? A relação das UBS contempladas em cada município está disponível no Sistema de Logística da AgSUS (Sisloga), com a identificação das unidades indicadas para recebimento dos equipamentos."
   },
   {
     "id": "faq_9",
-    "text": "Qual local de entrega do combo? Os equipamentos serão entregues no endereço cadastrado no formulário da AgSUS, disponibilizado aos secretários municipais (Secretaria Municipal de Saúde ou almoxarifados). Exceção: câmara fria será entregue na UBS indicada na formalização da proposta."
+    "text": "2.1 - Quais etapas os municípios tiveram que cumprir para receber os equipamentos? Os equipamentos foram destinados a todos os municípios e ao Distrito Federal que participaram integralmente do processo de adesão e seleção do Novo PAC Saúde 2025, conforme previsto nas Portarias GM/MS nº 6.640, de 20 de fevereiro de 2025, e GM/MS nº 7.613, de 17 de julho de 2025 bem como nas demais etapas estabelecidas pelo Ministério da Saúde, incluindo a formalização da adesão. Por exemplo, os municípios com propostas selecionadas constantes na Portaria GM/MS nº 7.613/2025 tiveram de participar da formalização da adesão à proposta junto ao Ministério da Saúde, por meio do sistema InvestSUS, com prazo finalizado em 22 de agosto de 2025. Essa etapa incluiu o aceite do Termo Declaratório de Compromisso e a i"
   },
   {
     "id": "faq_10",
-    "text": "O município precisa licitar os equipamentos? Não, o processo licitatório está sendo realizado pela AgSUS. Processo público: https://agenciasus.org.br/contratos/"
+    "text": "2.2 Como ocorreu o processo de inscrição/adesão da proposta por parte do município? O processo teve início com a abertura das inscrições no âmbito do Novo PAC Saúde 2025, possibilitando a participação de todos os municípios brasileiros e do Distrito Federal. A submissão das propostas ocorreu por meio da plataforma Transferegov.br, na qual cada ente federativo pôde cadastrar uma única proposta, com a possibilidade de solicitar um ou mais combos de equipamentos, respeitando-se o limite de um combo por UBS e a quantidade máxima de combos estabelecida conforme a faixa populacional do município. Como exemplo, municípios com até 10 mil habitantes puderam solicitar até 1 combo, enquanto municípios com mais de 500 mil habitantes puderam solicitar até 18 combos, observada a progressão intermediária"
   },
   {
     "id": "faq_11",
-    "text": "Qual o prazo para recebimento? As entregas estão sendo realizadas de forma gradual, em etapas. A primeira etapa iniciou em fevereiro de 2026, e as seguintes estão previstas até 2027."
+    "text": "2.3 Quais critérios foram utilizados pelo Ministério da Saúde para a seleção das propostas do Novo PAC Saúde? Todos os municípios que submeteram propostas por meio do sistema Transferegov.br foram selecionados, totalizando 5.126 entes habilitados a receber, no mínimo, um combo de equipamentos. O resultado foi formalizado pela Portaria GM/MS nº 7.613, de 17 de julho de 2025, que orientou os municípios habilitados a acessarem o sistema InvestSUS para formalização das propostas e indicação das Unidades Básicas de Saúde (UBS) contempladas, mediante informação do respectivo Cadastro Nacional de Estabelecimentos de Saúde (CNES), em conformidade com a quantidade de combos atribuída. Como resultado dessa etapa, 5.093 municípios concluíram a formalização das propostas, representando adesão superior"
   },
   {
     "id": "faq_12",
-    "text": "Onde os equipamentos devem ser instalados? Na Unidade do CNES indicado na formalização da proposta por meio do InvestSUS. O CNES informado na adesão permanece como prioritário."
+    "text": "2.4 Como foi definido o quantitativo de combos de equipamentos por município? O Ministério da Saúde utilizou critérios como porte populacional, vulnerabilidade social, quantidade de equipes de Saúde da Família, presença de equipes multiprofissionais, médicos do Programa Mais Médicos e capacidade operacional das UBS para definir o quantitativo de combos por município. Inicialmente, todos os municípios habilitados receberam pelo menos um combo e, posteriormente, os combos adicionais foram distribuídos conforme o Índice de Equidade e Dimensionamento (IED) e demais critérios técnicos mencionados."
   },
   {
     "id": "faq_13",
-    "text": "O município pode remanejar equipamentos entre Unidades? Sim, observando: 1. Vinculação administrativa (CNES no mesmo município), 2. Tipo de estabelecimento (obrigatoriamente UBS), 3. Priorizar UBS em áreas com maior concentração populacional, 4. Dar preferência a UBS com maior número de eSF, programas de residência, eMulti e Mais Médicos."
+    "text": "2.5 - Como saber se meu município foi contemplado e quantos combos irá receber? O Ministério da Saúde contemplou 5.093 municípios com o combo de equipamentos, considerando aqueles que concluíram a formalização da proposta no sistema InvestSUS dentro do prazo estabelecido. Os municípios que formalizaram a proposta podem consultar o quantitativo de combos que irão receber conforme disposto na Portaria GM/MS nº 7.613, de 17 de julho de 2025. Já o status da formalização da proposta pode ser acompanhado diretamente no sistema InvestSUS pelo gestor responsável do município."
   },
   {
     "id": "faq_14",
-    "text": "Quem é responsável pela conservação, manutenção e provisão de insumos? O município é responsável pela utilização segura, armazenamento, conservação e manutenção, incluindo cuidados periódicos, reparos e provisão de insumos necessários."
+    "text": "3.1 Como está sendo feita a aquisição dos equipamentos? A aquisição dos equipamentos está sendo realizada pela Agência Brasileira de Apoio à Gestão do Sistema Único de Saúde (AgSUS), em parceria com o Ministério da Saúde, por meio de processos licitatórios iniciados no segundo semestre de 2025. A AgSUS é responsável pela condução das licitações, contratação dos fornecedores e apoio logístico para distribuição dos equipamentos aos municípios contemplados."
   },
   {
     "id": "faq_15",
-    "text": "Em quais sistemas devo registrar os equipamentos? Nos sistemas patrimoniais do município, no CNES das UBS e no SISLOGA (Sistema de Logística da AgSUS)."
+    "text": "3.2 Como está sendo feita a entrega dos equipamentos? As entregas dos equipamentos tiveram início em fevereiro de 2026 e estão sendo acompanhadas pela AgSUS e pelo Ministério da Saúde. A distribuição ocorre de forma gradual e escalonada, considerando a complexidade logística do programa, que envolve cerca de 18 tipos diferentes de equipamentos, 10 mil unidades de cada item, exceto o equipamento de ultrassom portatil de bolso, além da atuação simultânea de diferentes empresas responsáveis pelo fornecimento, transporte e instalação das câmaras frias. Para organizar o processo de forma mais eficiente, a distribuição foi estruturada em três grandes fases.  De modo que os 5.093 municípios contemplados recebam integralmente todos os equipamentos. As entregas seguem critérios técnicos de prioriza"
   },
   {
     "id": "faq_16",
-    "text": "E se o equipamento chegar com defeito? Registrar a ocorrência no SISLOGA com fotos, incluir ressalva no verso da Nota Fiscal e recusar o recebimento do item. Tutorial: https://m.youtube.com/watch?v=bL_TuVI0czE"
+    "text": "3.3 Qual local de entrega dos equipamentos? Os equipamentos estão sendo entregues no endereço previamente informado pelo município no formulário disponibilizado pela AgSUS, que compôs a base de dados do Sistema de Logística da Agência (SISLOGA). Para garantir maior segurança e organização no recebimento, orientamos que as entregas ocorram, preferencialmente, nas sedes das Secretarias Municipais de Saúde ou nos almoxarifados centrais dos municípios, com identificação prévia do servidor responsável pelo recebimento dos equipamentos indicada pelo gestor municipal. Considerando as especificidades técnicas de instalação e funcionamento, a câmara fria destinada à conservação de vacinas está sendo entregue diretamente na Unidade Básica de Saúde (UBS) indicada pelo município no momento da formaliz"
   },
   {
     "id": "faq_17",
-    "text": "Haverá capacitação para uso dos equipamentos? Sim, o MS disponibiliza manuais de boas práticas para profissionais e gestores e realizará treinamentos remotos e/ou presenciais. Os fornecedores também disponibilizarão capacitação operacional, exceto para dermatoscópio, tábua de propriocepção e otoscópio."
+    "text": "3.4 - Onde os equipamentos devem ser instalados? Os equipamentos devem ser instalados e utilizados na Unidade Básica de Saúde vinculada ao CNES informado pelo gestor municípal no momento da formalização da proposta no sistema InvestSUS. O CNES indicado nesse processo é considerado a unidade de referência para destinação, entrega e instalação dos equipamentos, devendo ser mantido sempre que possível, a fim de garantir a adequada organização da rede assistencial, o planejamento das ações de saúde e o acompanhamento da execução do programa pelo Ministério da Saúde."
   },
   {
     "id": "faq_18",
-    "text": "Quem pode tirar dúvidas sobre o programa? CGFAP/DEAPS/SAPS: (61) 3315-9040, combo.ubs.pac@saude.gov.br. Secretaria Executiva – Novo PAC Saúde: (61) 3315-2223, novopac@saude.gov.br."
+    "text": "4 – Qualquer servidor pode receber os equipamentos do combo no ato da entrega na Secretaria Municipal de Saúde? Não. Os equipamentos serão entregues no endereço informado pelo município no formulário disponibilizado pela AgSUS, que compõe a base de dados do Sistema de Logística da Agência (SISLOGA). Nesse cadastro, o gestor municipal indicou previamente os servidores autorizados a realizar o recebimento dos equipamentos, tanto na sede da Secretaria Municipal de Saúde ou almoxarifado central, quanto na UBS de referência, no caso específico das câmaras frias. Por questões de segurança, rastreabilidade e controle logístico, recomenda-se que o recebimento seja realizado pelos profissionais previamente cadastrados pelo município no sistema."
   },
   {
     "id": "faq_19",
-    "text": "Quantos combos de equipamentos foram disponibilizados ao todo? 10.000 combos."
+    "text": "4.1 O que o servidor do município precisa fazer no ato da entrega dos equipamentos na Secretaria Municipal de Saúde ou na UBS? No momento da entrega, o servidor responsável indicado pelo município deverá acessar o SISLOGA (Sistema de Logística da AgSUS) para realizar o registro do recebimento dos equipamentos, incluindo informações da nota fiscal e registro fotográfico dos itens entregues. Caso seja identificada alguma não conformidade, como avarias, divergências ou ausência de itens, o servidor deverá: registrar a ocorrência no SISLOGA, com descrição detalhada e fotos que evidenciem o problema. incluir ressalva no verso da nota fiscal, descrevendo a irregularidade identificada. recusar o recebimento do item, quando aplicável. Para auxiliar nesse processo, a AgSUS disponibiliza material or"
   },
   {
     "id": "faq_20",
-    "text": "Qual o valor estimado do investimento por município? Cada combo conta com um investimento do governo federal de R$158 mil. Total de R$1,58 bilhões."
+    "text": "4.2 - Como atualizar ou alterar os dados do servidor responsável pelo recebimento dos equipamentos do combo? O gestor municipal pode realizar a atualização ou alteração dos servidores responsáveis pelo recebimento dos equipamentos diretamente no SISLOGA, sistema de logística da AgSUS. É importante manter os dados sempre atualizados para garantir o correto recebimento e registro das entregas. No caso específico das câmaras frias entregues diretamente nas UBS, recomenda-se que sejam indicados, preferencialmente, três servidores da unidade como responsáveis pelo recebimento, a fim de evitar intercorrências durante o processo de entrega e instalação do equipamento. Em caso de dúvidas ou necessidade de suporte, a AgSUS disponibiliza os seguintes canais de atendimento: Telefone: (61) 99675-4516 "
   },
   {
     "id": "faq_21",
-    "text": "Há critérios de prioridade entre municípios ou regiões? A distribuição considera critérios de priorização como quantitativo mínimo de equipes (pelo menos uma eSF e/ou eMulti), porte populacional, índice de vulnerabilidade, entre outros fatores."
+    "text": "4.3 - O município precisa pagar para receber os equipamentos? Não. O recebimento dos equipamentos do combo não gera qualquer custo para o município, incluindo despesas relacionadas à entrega, transporte ou instalação prevista no contrato. Caso haja solicitação de pagamento de taxas, cobranças adicionais ou qualquer procedimento irregular no ato da entrega, recomenda-se que o gestor municipal não realize nenhum pagamento, registre Boletim de Ocorrência junto às autoridades competentes e comunique imediatamente a AgSUS para apuração da situação."
   },
   {
     "id": "faq_22",
-    "text": "É possível solicitar troca de algum dos 17 tipos de equipamento? Não. Os itens são padronizados."
+    "text": "4.4 - Se o equipamento tiver alguma avaria ou dano, o município pode recusar o recebimento? Sim. Em casos de avaria, dano ou qualquer não conformidade identificada no momento da entrega, o município poderá recusar o recebimento do equipamento. Nesses casos, o servidor responsável deverá registrar a ocorrência no SISLOGA, incluindo descrição detalhada do problema e fotos que evidenciem a situação encontrada. Além disso, é necessário inserir ressalva no verso da Nota Fiscal, descrevendo a irregularidade identificada no ato da entrega. Esses registros são fundamentais para garantir o correto acompanhamento da ocorrência pela AgSUS e pela empresa responsável pela entrega. Para orientações adicionais sobre o procedimento de recebimento e registro de ocorrências, recomenda-se consultar o vídeo e"
   },
   {
     "id": "faq_23",
-    "text": "Será possível registrar os procedimentos realizados com esses equipamentos? Sim, o Prontuário Eletrônico e-SUS APS foi atualizado. O registro refere-se ao ato assistencial, e não ao equipamento."
+    "text": "4.5- Quais são os procedimentos necessários para garantir a doação e o registro do equipamento para o município? A doação dos equipamentos aos municípios irá ocorrer após a tramitação de processos via Sistema Eletrônico de Informação (SEI), com necessidade de preenchimento e assinatura de Termo de Doação com posterior publicação de Extrato de Doação no Diário Oficial da União. A primeira ação essencial para possibilitar a doação dos equipamentos é que os municípios preencham as documentações relativas aos dados da entrega no Sisloga (Link: sisloga.agenciasus.org.br/login). Depois, o município deve aguardar o recebimento de documentação via SEI, informar os dados solicitados pela área técnica e realizar as devidas assinaturas para devolução do processo ao Ministério da Saúde. Após finalizaç"
   },
   {
     "id": "faq_24",
-    "text": "O município pode adquirir itens complementares ao combo? Sim, com recursos próprios."
+    "text": "4.6 - As entregas das câmaras frias são realizadas diretamente na UBS? Como garantir que essa entrega seja finalizada com sucesso? Sim. As câmaras frias destinadas à conservação de vacinas estão sendo entregues diretamente na Unidade Básica de Saúde (UBS) indicada pelo município no momento da formalização da proposta no InvestSUS, considerando as exigências técnicas específicas relacionadas à instalação, armazenamento e funcionamento adequado do equipamento. Para garantir o sucesso da entrega, recomenda-se que o município indique, preferencialmente, pelo menos três servidores da UBS como responsáveis pelo recebimento da câmara fria, mantendo os dados devidamente atualizados no SISLOGA. No ato da entrega, os servidores responsáveis deverão realizar o registro do recebimento no sistema, incl"
   },
   {
     "id": "faq_25",
-    "text": "Há exigência de infraestrutura mínima para instalação? Sim. Alguns equipamentos exigem condições mínimas como requisitos elétricos, espaço físico e condições ambientais. Verificar nos manuais de uso."
+    "text": "5.1 - O município pode remanejar equipamentos entre Unidades? Sim. O município possui autonomia para utilizar os equipamentos de forma estratégica dentro do seu território, desde que a utilização permaneça no escopo da Atenção Primária à Saúde e contribua para a organização da rede de serviços e ampliação do acesso da população. O remanejamento dos equipamentos entre Unidades Básicas de Saúde poderá ser realizado mediante justificativa técnica e observância dos princípios de equidade, eficiência e adequada utilização dos equipamentos públicos. Recomenda-se que o remanejamento ocorra entre estabelecimentos vinculados ao mesmo município e obrigatoriamente cadastrados como UBS no CNES. Além disso, devem ser priorizadas unidades localizadas em áreas de maior concentração populacional ou territ"
   },
   {
     "id": "faq_26",
-    "text": "Ainda não recebi todos os 17 equipamentos. Ainda vou receber? Sim. O município receberá todos os equipamentos faltantes, pois cada combo consiste nos 17 itens."
+    "text": "5.2- Quem é responsável pela conservação, manutenção dos equipamentos e provisão de insumos para uso? Os equipamentos entregues possuem, no mínimo, 12 meses de garantia do fabricante, além de assistência técnica autorizada em todo o território nacional. Os itens também acompanham manual de instalação, orientações de uso e demais informações técnicas necessárias para sua adequada operação. Após o recebimento, o município passa a ser responsável pela utilização segura dos equipamentos, bem como pelo seu adequado armazenamento, conservação e manutenção preventiva e corretiva, incluindo a realização de cuidados periódicos e eventuais reparos necessários ao longo do uso. Também cabe ao município garantir a provisão dos insumos necessários ao funcionamento dos equipamentos, assegurando sua utili"
   },
   {
     "id": "faq_27",
-    "text": "Quantos equipamentos meu município vai receber? Cada combo inclui 17 equipamentos (1 de cada tipo). O total de equipamentos depende da quantidade de combos atribuídos ao município."
+    "text": "5.3 - Como garantir o correto armazenamento e conservação dos equipamentos recebidos? Para garantir o correto armazenamento, conservação e utilização dos equipamentos, recomenda-se que os municípios sigam as orientações técnicas contidas nos manuais de instalação, uso e manutenção fornecidos pelos fabricantes de cada equipamento. Além disso, o Ministério da Saúde, por meio da SAPS/MS, disponibiliza material orientativo para apoio aos gestores e equipes de saúde, com recomendações sobre boas práticas de utilização, conservação e organização dos equipamentos no âmbito da Atenção Primária à Saúde (APS): Guia Prático Equipamentos clínicos e gerais - Versão Gestão"
   },
   {
     "id": "faq_28",
-    "text": "Como proceder se a UBS indicada estiver em reforma? Redesignação do CNES, observando vinculação administrativa, tipo de estabelecimento, porte populacional e capacidade assistencial."
+    "text": "5.4 - Os equipamentos possuem garantia e assistência técnica disponível? Sim. Todos os equipamentos possuem garantia mínima de 12 meses, contados a partir da data de recebimento do equipamento pelo município, conforme previsto nos contratos de aquisição. Além da garantia, os equipamentos contam com assistência técnica autorizada em todo o território nacional. Em caso de necessidade de manutenção ou acionamento da garantia, recomenda-se consultar o manual técnico do equipamento e entrar em contato diretamente com o fornecedor ou assistência autorizada indicada pelo fabricante, conforme orientações disponibilizadas junto ao produto."
   },
   {
     "id": "faq_29",
-    "text": "É possível alterar a UBS indicada após a adesão? O CNES informado na adesão permanece prioritário. Contato: (61) 3315-9040, combo.ubs.pac@saude.gov.br."
+    "text": "5.5 - Quais insumos são necessários para manter os equipamentos em uso? De quem é a responsabilidade pelos insumos? Cada equipamento possui uma necessidade individual de insumos descritos no manual do usuário. Cabe a gestão local a disponibilização dos insumos para as UBS e a organização de quantitativo adequado e reposição em tempo oportuno dos insumos para que não haja interrupção assistencial."
   },
   {
     "id": "faq_30",
-    "text": "O programa prevê monitoramento do uso? Sim, via registro no SCNES e no prontuário eletrônico e-SUS APS."
+    "text": "5.6 - O município pode adquirir itens complementares ao combo? Sim. O município possui autonomia para adquirir, com recursos próprios, itens complementares que contribuam para a melhor utilização dos equipamentos do combo e para o fortalecimento das ações da Atenção Primária à Saúde (APS), observadas as necessidades locais e a organização da rede de serviços."
   },
   {
     "id": "faq_31",
-    "text": "Como registrar problemas no recebimento? Tutorial: https://www.youtube.com/watch?v=bL_TuVI0czE. Contato AgSUS: contatocomboubs@agenciasus.org.br, (61) 99675-4516 e (61) 99658-9289."
+    "text": "5.7 - Há exigência de infraestrutura mínima para instalação dos equipamentos? Sim. Alguns equipamentos possuem especificações técnicas que exigem condições mínimas de infraestrutura para sua instalação e funcionamento adequado, como requisitos elétricos, espaço físico e condições ambientais. Essas condições devem ser verificadas nos manuais de uso de cada equipamento."
   },
   {
     "id": "faq_32",
-    "text": "Existe canal direto com o Ministério para suporte? CGFAP/DEAPS/SAPS: (61) 3315-9040, combo.ubs.pac@saude.gov.br. Novo PAC Saúde: (61) 3315-2223, novopac@saude.gov.br."
+    "text": "6.1 Haverá capacitação para uso dos equipamentos? Sim. O Ministério da Saúde disponibiliza manuais de boas práticas para o uso dos equipamentos na Atenção Primária à Saúde (APS), voltados tanto para profissionais quanto para gestores (links). Além disso, estão previstos cursos autoinstrucionais e a formação de multiplicadores a nível estadual para qualificação presencial conforme a necessidade de cada equipamento e estratégia de implementação.\nAdicionalmente, os fornecedores serão responsáveis por ofertar capacitação operacional específica para os equipamentos fornecidos, com exceção do dermatoscópio, da tábua de propriocepção e do otoscópio, por já fazerem parte do cotidiano assistencial."
   },
   {
     "id": "faq_33",
-    "text": "O programa pode ter novas fases ou ampliação futura? Sim, conforme planejamento e disponibilidade orçamentária. Acompanhe os canais oficiais."
+    "text": "6.3 Com quem consigo tirar dúvidas sobre o programa? O Ministério da Saúde disponibiliza canais de contato para esclarecimento de dúvidas relacionadas ao programa:\nCoordenação Geral de Financiamento da Atenção Primária - CGFAP/SAPS\n📞 (61) 3315-9040\n📧 combo.ubs.pac@saude.gov.br AgSUS disponibiliza os seguintes canais de atendimento: Telefone: (61) 99675-4516 / (61) 99658-9289 E-mail: contatocomboubs@agenciasus.org.br"
+  },
+  {
+    "id": "faq_34",
+    "text": "7.1 Será possível registrar os procedimentos realizados na APS com esses novos equipamentos? Sim. Para os equipamentos utilizados na realização de procedimentos assistenciais, o registro deve ser feito no Prontuário Eletrônico e-SUS APS, conforme o atendimento prestado e orientações presentes nos guias práticos versão profissional. Destaca-se que o registro se refere ao ato assistencial, e não ao equipamento em si. Para equipamentos de apoio ou de uso não assistencial direto, como aqueles voltados à logística, mobilidade ou suporte ao cuidado, não se aplica o registro de procedimento no prontuário eletrônico, devendo ser observados outros tipos de registro, quando pertinentes, tais como o registro no SCNES."
+  },
+  {
+    "id": "faq_35",
+    "text": "7.2 O programa prevê monitoramento do uso dos equipamentos? Sim, o programa prevê monitoramento através do registro do equipamento vinculado a UBS via SCNES e via registro de procedimentos assistenciais no prontuário eletrônico e-SUS APS. É também, de responsabilidade da gestão municipal o acompanhamento da utilização dos equipamentos e a organização do fluxo de cuidado para garantir o acesso aos usuários no território e impedir a subutilização do investimento em infraestrutura."
   },
   {
     "id": "epdf_1",

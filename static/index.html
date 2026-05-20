@@ -79,7 +79,10 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
 .card-bp .sug-btn .arrow{color:var(--green)}
 
 /* INPUT */
-.input-area{padding:16px 0;display:flex;gap:12px}
+.disclaimer{background:#FFF3CD;border:1px solid #E8D44D;border-radius:10px;padding:10px 16px;font-size:12px;color:#665D1E;line-height:1.5;text-align:center}
+.disclaimer a{color:var(--blue);font-weight:600;text-decoration:none}
+.disclaimer a:hover{text-decoration:underline}
+.input-area{padding:12px 0;display:flex;gap:12px}
 .input-area input{flex:1;padding:16px 20px;border:2px solid #ddd;border-radius:var(--radius);font-size:15px;font-family:inherit;outline:none;background:var(--white);transition:border-color .2s}
 .input-area input:focus{border-color:var(--blue)}
 .input-area button{padding:16px 32px;background:var(--blue);color:var(--white);border:none;border-radius:var(--radius);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}
@@ -106,8 +109,8 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
           <div class="card-icon">📊</div>
           <h3>Consulta de dados</h3>
           <button class="sug-btn" onclick="askSuggestion(this)">Quantos combos Brasília recebeu?<span class="arrow">→</span></button>
-          <button class="sug-btn" onclick="askSuggestion(this)">Total de combos de Tocantins<span class="arrow">→</span></button>
-          <button class="sug-btn" onclick="askSuggestion(this)">Total de combos no Brasil<span class="arrow">→</span></button>
+          <button class="sug-btn" onclick="askSuggestion(this)">Quantos combos Ariquemes vai receber?<span class="arrow">→</span></button>
+          <button class="sug-btn" onclick="askSuggestion(this)">Quais equipamentos compõem o combo?<span class="arrow">→</span></button>
         </div>
 
         <!-- FAQ -->
@@ -133,6 +136,7 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
     </div>
   </div>
 
+  <div class="disclaimer">⚠️ Sou uma inteligência artificial que busca informações sobre o combo de equipamentos. Para conferência de informações e dúvidas envie um e-mail para <a href="mailto:contatocomboubs@agenciasus.org.br">contatocomboubs@agenciasus.org.br</a></div>
   <div class="input-area">
     <input type="text" id="input" placeholder="Pergunte sobre combos, equipamentos, boas práticas..."
            onkeydown="if(event.key==='Enter')sendMessage()">

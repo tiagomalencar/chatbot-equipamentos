@@ -15,8 +15,6 @@ with open(os.path.join(BASE_DIR, "municipios_data.json"), "r", encoding="utf-8")
     MUNICIPIOS = json.load(f)
 with open(os.path.join(BASE_DIR, "mun_duplicados.json"), "r", encoding="utf-8") as f:
     MUN_DUPLICADOS = json.load(f)
-with open(os.path.join(BASE_DIR, "total_uf_brasil.json"), "r", encoding="utf-8") as f:
-    TOTAL_UF_BRASIL = json.load(f)
 
 MUN_BY_IBGE = {m["ibge"]: m for m in MUNICIPIOS}
 MUN_BY_NOME = {}
@@ -32,7 +30,6 @@ UF_NOMES = {
     "RIO GRANDE DO NORTE":"RN","RIO GRANDE DO SUL":"RS","RONDONIA":"RO","RORAIMA":"RR",
     "SANTA CATARINA":"SC","SAO PAULO":"SP","SERGIPE":"SE","TOCANTINS":"TO",
 }
-TOTAL_BY_UF = {t["uf"]: t for t in TOTAL_UF_BRASIL}
 
 # ── PDF/FAQ chunks + TF-IDF ──
 PDF_CHUNKS = []
@@ -68,7 +65,7 @@ def normalize(text):
     text = unicodedata.normalize("NFKD", text)
     return "".join(c for c in text if not unicodedata.category(c).startswith("M")).upper().strip()
 
-# ── Municipality search (stable version) ──
+# ── Municipality search ──
 def search_municipios(query):
     query_upper = query.upper()
     query_norm = normalize(query)
@@ -81,7 +78,7 @@ def search_municipios(query):
         if code_int in MUN_BY_IBGE:
             results.append(MUN_BY_IBGE[code_int])
 
-    # UF detection
+    # UF detection (sigla or nome completo)
     found_uf = None
     for uf in UFS:
         if re.search(rf"\b{uf}\b", query_upper):
@@ -95,22 +92,6 @@ def search_municipios(query):
     if any(w in query_norm for w in ["PLANILHA","ARQUIVO","EXCEL","BAIXAR","DOWNLOAD"]):
         flags["pediu_arquivo"] = True
 
-    is_brasil = any(w in query_upper for w in ["BRASIL","PAÍS","NACIONAL"])
-    is_total = "TOTAL" in query_upper
-
-    # Brasil total - handle BEFORE municipality search
-    if is_brasil and "Total Brasil" in TOTAL_BY_UF:
-        t = TOTAL_BY_UF["Total Brasil"].copy(); t["_tipo"]="total_brasil"
-        results.append(t)
-        return results[:10], flags
-
-    # UF total - handle BEFORE municipality search
-    if found_uf and not results:
-        if found_uf in TOTAL_BY_UF:
-            t = TOTAL_BY_UF[found_uf].copy(); t["_tipo"]="total_uf"
-            results.append(t)
-            return results[:10], flags
-
     # Search by name
     if not results:
         scored = []
@@ -123,7 +104,6 @@ def search_municipios(query):
                 scored.append((90,nome,muns)); continue
             nome_words = [w for w in nome_norm.split() if len(w) > 3]
             if nome_words:
-                # Only match if ALL significant words match (whole-word)
                 matches = sum(1 for w in nome_words if w in query_words)
                 if matches == len(nome_words):
                     scored.append((80,nome,muns))
@@ -135,8 +115,8 @@ def search_municipios(query):
                     uf_muns = [m for m in muns if m["uf"]==found_uf]
                     if uf_muns: results.extend(uf_muns[:1])
                 else:
-                    all_ufs = list(set(m["uf"] for m in muns))
-                    flags["municipio_duplicado"] = {"nome":nome,"ufs":all_ufs,"qtd_ufs":MUN_DUPLICADOS[nome_norm]}
+                    all_ufs = sorted(set(m["uf"] for m in muns))
+                    flags["municipio_duplicado"] = {"nome":nome,"ufs":all_ufs}
                     results.extend(muns)
             else:
                 if found_uf:
@@ -145,23 +125,22 @@ def search_municipios(query):
                 else:
                     results.extend(muns[:1])
 
-    if is_total and not is_brasil and not found_uf and not results:
-        flags["total_ambiguo"] = True
-
-    # Generic quantity question without context
-    qty_words = ["QUANTOS","QUANTAS","QUANTO","DISTRIBUIDO","DISTRIBUIDOS","RECEBER","RECEBEU","SERAO"]
-    is_qty = any(w in query_upper for w in qty_words)
-    if is_qty and not results and not found_uf and not is_brasil:
-        flags["pergunta_generica_sem_contexto"] = True
-
-    if not results and not flags and not is_total and not is_brasil and not is_qty:
-        query_clean = re.sub(r"[^A-Z ]","",query_norm)
-        words = [w for w in query_clean.split() if len(w) > 3]
-        if words: flags["municipio_nao_encontrado"] = True
+    # If nothing found and it looks like a municipality question
+    if not results and not flags:
+        # Check if it's a generic quantity question (no municipality mentioned)
+        qty_words = ["QUANTOS","QUANTAS","QUANTO","DISTRIBUIDO","DISTRIBUIDOS","RECEBER","RECEBEU","SERAO"]
+        is_qty = any(w in query_upper for w in qty_words)
+        if is_qty:
+            flags["pergunta_generica_sem_contexto"] = True
+        else:
+            query_clean = re.sub(r"[^A-Z ]","",query_norm)
+            words = [w for w in query_clean.split() if len(w) > 3]
+            if words and not any(w in query_norm for w in ["BOAS","PRATICAS","COMO","CONSERVAR","LIMPAR","CUIDADOS","EQUIPAMENTO","COMBO","PROGRAMA","CAPACITACAO","GARANTIA","MANUTENCAO","REGISTRO","RECEBIMENTO"]):
+                flags["municipio_nao_encontrado"] = True
 
     return results[:10], flags
 
-# ── DeepSeek API ──
+# ── DeepSeek ──
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY","")
 DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
 
@@ -170,24 +149,24 @@ Responda perguntas sobre a distribuição de combos de equipamentos para UBS, bo
 
 REGRAS OBRIGATÓRIAS:
 1. Responda APENAS com base nos dados do contexto. Se não encontrar, diga claramente.
-2. Seja objetivo e direto. Use tabelas quando apropriado.
+2. Seja objetivo e direto.
 3. NÃO invente dados.
 4. Responda sempre em português brasileiro.
-5. NUNCA referencie documentos, fontes, PDFs, FAQs ou números de página. Responda naturalmente como se soubesse a informação.
-6. NUNCA informe quantidade por tipo de equipamento. Informe apenas a quantidade de COMBOS.
-7. Quando perguntado "quantos equipamentos", responda com a quantidade de combos e informe que cada combo possui 17 equipamentos.
-8. Pode listar quais são os 17 equipamentos do combo, mas NUNCA diga quantos de cada tipo o município vai receber.
-9. Se o usuário pedir planilha, arquivo ou download: diga que não é possível compartilhar arquivos, mas que pode ajudar via chat.
-10. Se "municipio_duplicado" nos flags: pergunte de qual estado (UF) antes de responder.
-11. Se "municipio_nao_encontrado" nos flags: diga que não encontrou pelo nome e pergunte se tem o código IBGE.
-12. Se "total_ambiguo" ou "pergunta_generica_sem_contexto" nos flags: pergunte ao usuário se deseja a informação do Brasil inteiro ou de algum município/estado específico. NÃO chute nenhum município.
-13. Mantenha o contexto da conversa (se falou de Brasília e depois pergunta "e os equipamentos?", refere-se a Brasília).
-14. Os 17 equipamentos DO COMBO são: 1.Balança portátil digital, 2.Cadeira de rodas, 3.Câmara fria para vacinas, 4.Dermatoscópio digital, 5.Dinamômetro digital, 6.DEA, 7.Doppler vascular portátil, 8.Eletrocardiógrafo digital, 9.Eletrocautério (bisturi elétrico), 10.Espirômetro digital, 11.Fotóforo clínico, 12.Laser terapêutico de baixa potência, 13.Otoscópio, 14.Retinógrafo portátil, 15.TENS e FES, 16.Tábua de propriocepção, 17.Ultrassom para fisioterapia.
+5. NUNCA referencie documentos, fontes, PDFs, FAQs ou números de página. Responda naturalmente.
+6. NUNCA faça contas com quantidades de equipamentos. Informe apenas a quantidade de COMBOS que o município vai receber.
+7. Quando perguntado "quantos equipamentos", responda com a quantidade de combos e explique que cada combo é composto por 17 equipamentos (liste-os caso ainda não tenha feito na conversa).
+8. NUNCA informe quantidade por tipo de equipamento.
+9. Se o usuário pedir planilha/arquivo/download: diga que não pode compartilhar arquivos, mas pode ajudar via chat.
+10. Se "municipio_duplicado" nos flags: informe que existem municípios com esse nome em mais de uma UF e PERGUNTE de qual estado, listando as opções.
+11. Se o usuário responder apenas o nome de um estado (ex: "Maranhão"), ASSOCIE à pergunta anterior sobre o município e busque o município naquela UF.
+12. Se "municipio_nao_encontrado" nos flags: diga que não encontrou pelo nome e pergunte se tem o código IBGE.
+13. Se "pergunta_generica_sem_contexto" nos flags: pergunte ao usuário a qual município se refere, pois as informações de quantidade estão disponíveis por município.
+14. Mantenha o contexto da conversa. Se falou de Brasília e depois pergunta "e quantos combos?", refere-se a Brasília.
+15. Os 17 equipamentos do combo são: 1.Balança portátil digital, 2.Cadeira de rodas, 3.Câmara fria para vacinas, 4.Dermatoscópio digital, 5.Dinamômetro digital, 6.DEA, 7.Doppler vascular portátil, 8.Eletrocardiógrafo digital, 9.Eletrocautério (bisturi elétrico), 10.Espirômetro digital, 11.Fotóforo clínico, 12.Laser terapêutico de baixa potência, 13.Otoscópio, 14.Retinógrafo portátil, 15.TENS e FES, 16.Tábua de propriocepção, 17.Ultrassom para fisioterapia.
 
 SOBRE BOAS PRÁTICAS:
-15. Você possui informações sobre boas práticas de uso, conservação, manutenção e indicações clínicas de TODOS os equipamentos mencionados nos guias, incluindo itens que NÃO fazem parte do combo. Pode e deve responder essas perguntas com toda informação disponível.
-16. A restrição de NÃO informar quantidades por tipo se aplica APENAS à distribuição de combos. Para perguntas sobre uso, conservação, indicações e boas práticas, responda normalmente.
-17. Se o usuário perguntar sobre a QUANTIDADE de um equipamento que não está nos 17 do combo, informe que não faz parte do combo e liste os 17. Mas se a pergunta for sobre USO ou CONSERVAÇÃO de qualquer equipamento, responda normalmente.
+16. Você possui informações sobre boas práticas de uso, conservação, manutenção e indicações de equipamentos. Pode e deve responder essas perguntas normalmente.
+17. A restrição de NÃO informar quantidades se aplica APENAS à distribuição. Para uso, conservação e boas práticas, responda com toda informação disponível.
 """
 
 @app.post("/api/chat")
@@ -200,7 +179,7 @@ async def chat(request: Request):
     mun_results, flags = search_municipios(question)
     pdf_results = search_pdf_chunks(question)
 
-    # If no municipality found and we have history, try with context
+    # If no municipality found, try with conversation context
     if not mun_results and not flags.get("pergunta_generica_sem_contexto") and history:
         recent = [h["content"] for h in history if h["role"]=="user"][-2:]
         search_text = " ".join(recent) + " " + question
