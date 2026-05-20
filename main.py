@@ -175,12 +175,56 @@ async def chat(request: Request):
     question = body.get("message","")
     history = body.get("history",[])
 
-    # Search question alone first
+    # Detect if user is answering with just a state name (response to "which UF?" question)
+    question_norm = normalize(question)
+    is_uf_response = False
+    detected_uf = None
+
+    # Check if question is just a UF sigla
+    if question.strip().upper() in UFS:
+        detected_uf = question.strip().upper()
+        is_uf_response = True
+    # Check if question is just a state name
+    for nome_estado, sigla in UF_NOMES.items():
+        if nome_estado == question_norm or question_norm == nome_estado:
+            detected_uf = sigla
+            is_uf_response = True
+            break
+
+    # If user just answered with a UF, find the municipality from previous messages
+    if is_uf_response and history:
+        # Look for the municipality name in recent user messages
+        for h in reversed(history):
+            if h["role"] == "user":
+                prev_results, prev_flags = search_municipios(h["content"])
+                if prev_results:
+                    # Filter by the UF the user just specified
+                    for r in prev_results:
+                        if r.get("uf") == detected_uf:
+                            mun_results = [r]
+                            flags = {}
+                            pdf_results = search_pdf_chunks(h["content"] + " " + question)
+                            # Build context and call LLM
+                            parts = []
+                            if mun_results:
+                                parts.append("=== DADOS ===")
+                                for r2 in mun_results: parts.append(json.dumps(r2, ensure_ascii=False, indent=2))
+                            if pdf_results:
+                                parts.append("\n=== INFORMAÇÕES COMPLEMENTARES ===")
+                                for c in pdf_results: parts.append(c['text'])
+                            context = "\n---\n".join(parts) if parts else "Nenhum dado encontrado."
+                            messages = [{"role":"system","content":SYSTEM_PROMPT}]
+                            for hh in history[-6:]: messages.append({"role":hh["role"],"content":hh["content"]})
+                            messages.append({"role":"user","content":f"DADOS:\n{context}\n\nPERGUNTA:\n{question}"})
+                            return await _call_deepseek(messages)
+                break
+
+    # Normal flow: search question alone first
     mun_results, flags = search_municipios(question)
     pdf_results = search_pdf_chunks(question)
 
     # If no municipality found, try with conversation context
-    if not mun_results and not flags.get("pergunta_generica_sem_contexto") and history:
+    if not mun_results and history:
         recent = [h["content"] for h in history if h["role"]=="user"][-2:]
         search_text = " ".join(recent) + " " + question
         mun_results2, flags2 = search_municipios(search_text)
@@ -202,6 +246,10 @@ async def chat(request: Request):
     for h in history[-6:]: messages.append({"role":h["role"],"content":h["content"]})
     messages.append({"role":"user","content":f"DADOS:\n{context}\n\nPERGUNTA:\n{question}"})
 
+    return await _call_deepseek(messages)
+
+
+async def _call_deepseek(messages):
     if not DEEPSEEK_API_KEY:
         return JSONResponse({"error":"DEEPSEEK_API_KEY não configurada."},status_code=500)
 
