@@ -1,4 +1,5 @@
 import os, json, re, math, unicodedata
+from datetime import datetime
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,7 +9,21 @@ import httpx
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 BASE_DIR = os.path.dirname(__file__)
+LOG_FILE = os.path.join(BASE_DIR, "chat_logs.jsonl")
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
+
+def log_conversation(question, answer, ip=""):
+    try:
+        entry = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "question": question,
+            "answer": answer[:500],
+            "ip": ip,
+        }
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except:
+        pass
 
 # ── Load data ──
 with open(os.path.join(BASE_DIR, "municipios_data.json"), "r", encoding="utf-8") as f:
@@ -217,7 +232,7 @@ async def chat(request: Request):
                             messages = [{"role":"system","content":SYSTEM_PROMPT}]
                             for hh in history[-6:]: messages.append({"role":hh["role"],"content":hh["content"]})
                             messages.append({"role":"user","content":f"DADOS:\n{context}\n\nPERGUNTA:\n{question}"})
-                            return await _call_deepseek(messages)
+                            return await _call_and_log(messages, question, request)
                 break
 
     # Normal flow: search question alone first
@@ -247,10 +262,11 @@ async def chat(request: Request):
     for h in history[-6:]: messages.append({"role":h["role"],"content":h["content"]})
     messages.append({"role":"user","content":f"DADOS:\n{context}\n\nPERGUNTA:\n{question}"})
 
-    return await _call_deepseek(messages)
+    return await _call_and_log(messages, question, request)
 
 
-async def _call_deepseek(messages):
+async def _call_and_log(messages, question, request):
+    ip = request.client.host if request.client else ""
     if not DEEPSEEK_API_KEY:
         return JSONResponse({"error":"DEEPSEEK_API_KEY não configurada."},status_code=500)
 
@@ -264,7 +280,26 @@ async def _call_deepseek(messages):
 
     data = resp.json()
     answer = data["choices"][0]["message"]["content"]
+    log_conversation(question, answer, ip)
     return {"answer":answer}
+
+
+LOGS_PASSWORD = os.environ.get("LOGS_PASSWORD", "combo2026")
+
+@app.get("/api/logs")
+async def get_logs(senha: str = "", limit: int = 100):
+    if senha != LOGS_PASSWORD:
+        return JSONResponse({"error": "Acesso negado. Use ?senha=SUA_SENHA"}, status_code=401)
+    if not os.path.exists(LOG_FILE):
+        return {"logs": [], "total": 0}
+    logs = []
+    with open(LOG_FILE, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                try: logs.append(json.loads(line))
+                except: pass
+    logs.reverse()
+    return {"logs": logs[:limit], "total": len(logs)}
 
 @app.get("/")
 async def index():

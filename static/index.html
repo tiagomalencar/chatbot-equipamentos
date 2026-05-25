@@ -12,19 +12,8 @@
   --green:#168821;--bg:#F5F0E8;--white:#fff;--gray:#666;--radius:16px;
 }
 html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg);color:#333}
-
-/* HEADER */
-.header{
-  background:url('/static/header-bg.png') center top/100% auto no-repeat;
-  background-color:var(--blue-dark);
-  height:0;padding-bottom:9.7%;/* 163/1675 aspect ratio */
-  min-height:80px;
-}
-
-/* MAIN */
+.header{background:url('/static/header-bg.png') center top/100% auto no-repeat;background-color:var(--blue-dark);height:0;padding-bottom:9.7%;min-height:80px}
 .main{max-width:1100px;margin:0 auto;min-height:calc(100vh - 120px);display:flex;flex-direction:column;padding:0 24px}
-
-/* MESSAGES */
 .messages{flex:1;overflow-y:auto;padding:24px 0;display:flex;flex-direction:column;gap:16px}
 .msg{max-width:80%;padding:16px 20px;border-radius:var(--radius);font-size:15px;line-height:1.6;animation:fadeIn .3s ease}
 .msg-user{align-self:flex-end;background:var(--blue);color:var(--white);border-bottom-right-radius:4px}
@@ -33,7 +22,6 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
 .msg-bot th,.msg-bot td{border:1px solid #e0d8cc;padding:6px 10px;text-align:left}
 .msg-bot th{background:var(--blue);color:var(--white);font-weight:600}
 .msg-bot strong{color:var(--blue-dark)}
-
 .typing{align-self:flex-start;padding:16px 20px;background:var(--white);border:1px solid #e0d8cc;border-radius:var(--radius);border-bottom-left-radius:4px}
 .typing span{display:inline-block;width:8px;height:8px;background:var(--blue);border-radius:50%;margin:0 2px;animation:bounce .6s infinite}
 .typing span:nth-child(2){animation-delay:.15s}
@@ -47,24 +35,18 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
 .welcome-intro h2{font-size:18px;color:var(--blue-dark);font-weight:700}
 .welcome-intro h2 strong{color:var(--blue)}
 .welcome-intro p{color:var(--gray);font-size:14px;margin-top:4px}
-
-/* CARDS */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media(max-width:768px){.cards{grid-template-columns:1fr}}
-
 .card{background:var(--white);border-radius:var(--radius);padding:24px 20px;border:2px solid #e0d8cc;position:relative;overflow:hidden}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
 .card.card-data::before{background:var(--yellow)}
 .card.card-faq::before{background:var(--orange)}
 .card.card-bp::before{background:var(--green)}
-
 .card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:24px}
 .card-data .card-icon{background:#FFF8DC}
 .card-faq .card-icon{background:#FFF0E0}
 .card-bp .card-icon{background:#E8F5E9}
-
 .card h3{text-align:center;font-size:15px;font-weight:700;color:var(--blue-dark);margin-bottom:14px}
-
 .sug-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;margin-bottom:8px;border-radius:10px;border:1.5px solid #ddd;background:var(--white);cursor:pointer;font-family:inherit;font-size:13px;color:#444;text-align:left;transition:all .2s}
 .card-data .sug-btn{border-color:#E8D44D}
 .card-data .sug-btn:hover{background:#FFFDE7;border-color:var(--yellow)}
@@ -72,13 +54,20 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
 .card-faq .sug-btn:hover{background:#FFF8F0;border-color:var(--orange)}
 .card-bp .sug-btn{border-color:#66BB6A}
 .card-bp .sug-btn:hover{background:#F1F8E9;border-color:var(--green)}
-
 .sug-btn .arrow{font-size:16px;color:inherit;flex-shrink:0;margin-left:8px}
 .card-data .sug-btn .arrow{color:#C8A800}
 .card-faq .sug-btn .arrow{color:var(--orange)}
 .card-bp .sug-btn .arrow{color:var(--green)}
 
-/* INPUT */
+/* QUICK SUGGESTIONS (inline after conversation starts) */
+.quick-bar{display:flex;flex-wrap:wrap;gap:6px;padding:8px 0;align-self:flex-start}
+.quick-btn{background:var(--white);border:1px solid #ccc;color:var(--blue);padding:6px 14px;border-radius:16px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
+.quick-btn:hover{background:var(--blue);color:var(--white);border-color:var(--blue)}
+
+/* BACK BUTTON */
+.back-btn{background:none;border:1.5px solid var(--blue);color:var(--blue);padding:8px 16px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:600;transition:all .2s;align-self:center;margin:8px 0}
+.back-btn:hover{background:var(--blue);color:var(--white)}
+
 .disclaimer{background:#FFF3CD;border:1px solid #E8D44D;border-radius:10px;padding:10px 16px;font-size:12px;color:#665D1E;line-height:1.5;text-align:center}
 .disclaimer a{color:var(--blue);font-weight:600;text-decoration:none}
 .disclaimer a:hover{text-decoration:underline}
@@ -88,7 +77,6 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
 .input-area button{padding:16px 32px;background:var(--blue);color:var(--white);border:none;border-radius:var(--radius);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}
 .input-area button:hover{background:var(--blue-dark)}
 .input-area button:disabled{background:#ccc;color:#999;cursor:not-allowed}
-
 .footer{text-align:center;padding:6px;font-size:10px;color:#aaa}
 </style>
 </head>
@@ -102,9 +90,7 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
       <div class="welcome-intro">
         <h2><strong>Consulte informações</strong> sobre combos<br>de equipamentos, boas práticas de uso<br>e dúvidas gerais sobre o programa.</h2>
       </div>
-
       <div class="cards">
-        <!-- DATA -->
         <div class="card card-data">
           <div class="card-icon">📊</div>
           <h3>Consulta de dados</h3>
@@ -112,8 +98,6 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
           <button class="sug-btn" onclick="askSuggestion(this)">Quantos combos meu município vai ganhar?<span class="arrow">→</span></button>
           <button class="sug-btn" onclick="askSuggestion(this)">Quais equipamentos compõem o combo?<span class="arrow">→</span></button>
         </div>
-
-        <!-- FAQ -->
         <div class="card card-faq">
           <div class="card-icon">❓</div>
           <h3>Perguntas frequentes</h3>
@@ -122,8 +106,6 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
           <button class="sug-btn" onclick="askSuggestion(this)">Quem é responsável pela manutenção?<span class="arrow">→</span></button>
           <button class="sug-btn" onclick="askSuggestion(this)">Como saber se fui contemplado?<span class="arrow">→</span></button>
         </div>
-
-        <!-- BOAS PRATICAS -->
         <div class="card card-bp">
           <div class="card-icon">🔧</div>
           <h3>Boas práticas de uso</h3>
@@ -147,13 +129,112 @@ html,body{height:100%;font-family:'Source Sans 3',sans-serif;background:var(--bg
 
 <script>
 const messagesEl=document.getElementById('messages'),inputEl=document.getElementById('input'),sendBtn=document.getElementById('sendBtn'),welcomeEl=document.getElementById('welcome');
-let isLoading=false, chatHistory=[];
-function askSuggestion(btn){const text=btn.textContent.replace('→','').trim();inputEl.value=text;sendMessage()}
-function addMessage(text,isUser){if(welcomeEl)welcomeEl.style.display='none';const div=document.createElement('div');div.className=`msg ${isUser?'msg-user':'msg-bot'}`;if(isUser){div.textContent=text}else{div.innerHTML=formatMarkdown(text)}messagesEl.appendChild(div);messagesEl.scrollTop=messagesEl.scrollHeight}
+let isLoading=false, chatHistory=[], conversationStarted=false;
+
+const QUICK_SUGGESTIONS = [
+  "Quantos combos meu município vai receber?",
+  "Quais equipamentos compõem o combo?",
+  "E se o equipamento chegar com defeito?",
+  "Quem é responsável pela manutenção?",
+  "Como conservar o DEA?",
+  "Cuidados com a câmara fria",
+];
+
+function askSuggestion(btn){
+  const text=btn.textContent.replace('→','').trim();
+  inputEl.value=text;
+  sendMessage();
+}
+
+function showQuickSuggestions(){
+  const bar = document.createElement('div');
+  bar.className = 'quick-bar';
+  QUICK_SUGGESTIONS.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-btn';
+    btn.textContent = s;
+    btn.onclick = () => { inputEl.value = s; sendMessage(); };
+    bar.appendChild(btn);
+  });
+  // Add "show all" button
+  const allBtn = document.createElement('button');
+  allBtn.className = 'back-btn';
+  allBtn.textContent = '📋 Ver todas as sugestões';
+  allBtn.onclick = showFullSuggestions;
+  bar.appendChild(allBtn);
+  messagesEl.appendChild(bar);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function showFullSuggestions(){
+  // Re-show welcome panel as a message
+  const div = document.createElement('div');
+  div.style.width = '100%';
+  div.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0">
+      <div style="background:var(--white);border-radius:12px;padding:16px;border:1.5px solid #E8D44D">
+        <div style="text-align:center;font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:14px">📊 Consulta de dados</div>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#E8D44D" onclick="askQ(this)">Quantos combos Brasília vai receber?</button>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#E8D44D" onclick="askQ(this)">Quantos combos meu município vai ganhar?</button>
+        <button class="quick-btn" style="width:100%;text-align:left;padding:8px 12px;border-color:#E8D44D" onclick="askQ(this)">Quais equipamentos compõem o combo?</button>
+      </div>
+      <div style="background:var(--white);border-radius:12px;padding:16px;border:1.5px solid #F0A060">
+        <div style="text-align:center;font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:14px">❓ Perguntas frequentes</div>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#F0A060" onclick="askQ(this)">O que é o combo de equipamentos?</button>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#F0A060" onclick="askQ(this)">E se o equipamento chegar com defeito?</button>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#F0A060" onclick="askQ(this)">Quem é responsável pela manutenção?</button>
+        <button class="quick-btn" style="width:100%;text-align:left;padding:8px 12px;border-color:#F0A060" onclick="askQ(this)">Como saber se fui contemplado?</button>
+      </div>
+      <div style="background:var(--white);border-radius:12px;padding:16px;border:1.5px solid #66BB6A">
+        <div style="text-align:center;font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:14px">🔧 Boas práticas</div>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#66BB6A" onclick="askQ(this)">Como conservar o desfibrilador (DEA)?</button>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#66BB6A" onclick="askQ(this)">Como limpar o eletrocardiógrafo?</button>
+        <button class="quick-btn" style="width:100%;margin-bottom:6px;text-align:left;padding:8px 12px;border-color:#66BB6A" onclick="askQ(this)">Cuidados com a câmara fria de vacinas</button>
+        <button class="quick-btn" style="width:100%;text-align:left;padding:8px 12px;border-color:#66BB6A" onclick="askQ(this)">Boas práticas com o espirômetro</button>
+      </div>
+    </div>
+  `;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function askQ(btn){inputEl.value=btn.textContent.trim();sendMessage()}
+
+function addMessage(text,isUser){
+  if(welcomeEl && welcomeEl.style.display !== 'none'){
+    welcomeEl.style.display='none';
+    conversationStarted=true;
+  }
+  const div=document.createElement('div');
+  div.className=`msg ${isUser?'msg-user':'msg-bot'}`;
+  if(isUser){div.textContent=text}else{div.innerHTML=formatMarkdown(text)}
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+}
+
 function showTyping(){const div=document.createElement('div');div.className='typing';div.id='typing';div.innerHTML='<span></span><span></span><span></span>';messagesEl.appendChild(div);messagesEl.scrollTop=messagesEl.scrollHeight}
 function hideTyping(){const el=document.getElementById('typing');if(el)el.remove()}
 function formatMarkdown(text){text=text.replace(/\|(.+)\|\n\|[-|: ]+\|\n((?:\|.+\|\n?)*)/g,(m,header,rows)=>{const ths=header.split('|').filter(Boolean).map(h=>`<th>${h.trim()}</th>`).join('');const trs=rows.trim().split('\n').map(row=>{const tds=row.split('|').filter(Boolean).map(d=>`<td>${d.trim()}</td>`).join('');return`<tr>${tds}</tr>`}).join('');return`<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`});text=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');text=text.replace(/\n/g,'<br>');return text}
-async function sendMessage(){const msg=inputEl.value.trim();if(!msg||isLoading)return;isLoading=true;sendBtn.disabled=true;inputEl.value='';addMessage(msg,true);showTyping();try{const resp=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:chatHistory})});const data=await resp.json();hideTyping();if(data.error){addMessage('❌ Erro: '+data.error,false)}else{chatHistory.push({role:'user',content:msg});chatHistory.push({role:'assistant',content:data.answer});addMessage(data.answer,false)}}catch(e){hideTyping();addMessage('❌ Erro de conexão com o servidor.',false)}isLoading=false;sendBtn.disabled=false;inputEl.focus()}
+
+async function sendMessage(){
+  const msg=inputEl.value.trim();
+  if(!msg||isLoading)return;
+  isLoading=true;sendBtn.disabled=true;inputEl.value='';
+  addMessage(msg,true);showTyping();
+  try{
+    const resp=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:chatHistory})});
+    const data=await resp.json();
+    hideTyping();
+    if(data.error){addMessage('❌ Erro: '+data.error,false)}
+    else{
+      chatHistory.push({role:'user',content:msg});
+      chatHistory.push({role:'assistant',content:data.answer});
+      addMessage(data.answer,false);
+      showQuickSuggestions();
+    }
+  }catch(e){hideTyping();addMessage('❌ Erro de conexão com o servidor.',false)}
+  isLoading=false;sendBtn.disabled=false;inputEl.focus();
+}
 </script>
 </body>
 </html>
